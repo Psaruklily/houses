@@ -1,0 +1,40 @@
+.img {
+    width: 300px;
+}
+
+.size-div {
+    box-sizing: border-box;
+    width: 400px;
+    padding: 10px 50px;
+}
+
+.align {
+    text-align: left;
+}
+
+.align-first-line {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: "Mulish",sans-serif;
+    color: #010118;
+}
+
+.font-bad-square {
+    font-size: 14px;
+    margin: 4px 0px 0px 5px;
+
+}
+
+.address {
+    font-size: 14px;
+    color: rgba(1,1,24,.6);
+}
+
+.margin-adress {
+    margin-top: 8px;
+}

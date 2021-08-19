@@ -1,0 +1,7 @@
+.main-container {
+    background-color: rgb(225, 236, 236);
+    display: flex;
+    flex-wrap: wrap;
+    width: 1200px;
+    margin: 20px auto;
+}
