@@ -2,6 +2,8 @@
     background-color: rgb(225, 236, 236);
     display: flex;
     flex-wrap: wrap;
-    width: 1200px;
+    width: 90vw;
+    max-width: 2000px;
     margin: 20px auto;
 }
+

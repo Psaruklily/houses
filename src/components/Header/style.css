@@ -1,0 +1,46 @@
+.header {
+    /* background: rgb(228, 173, 173); */
+    width: 100vw;
+    height: 64px;
+    padding: 0px 32px;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    margin-right: 10px;
+}
+
+.header-logo {
+    text-decoration: none;
+    color: #000;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.header-input-container {
+    width: 440px;
+    height: 40px;
+}
+
+.input {
+    height: 100%;
+    width: 100%;
+    border: 1px solid #c4c4c4;
+    border-radius: 4px;
+    outline: none;
+    padding: 8px 40px 8px 16px;
+    box-sizing: border-box;
+    background: url('../../icons8-search.svg') no-repeat scroll 400px 7px;
+    background-color: #fff;
+}
+
+.input::placeholder {
+    font-size: 16px;
+    font-weight: 100;
+}
+
+
+
+
+

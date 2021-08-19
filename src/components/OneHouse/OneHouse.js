@@ -5,7 +5,7 @@ export const OneHouse = (props) => {
     console.log(props);
     const {house} = props;
     return(
-        <div className='size-div'>
+            <div className='size-div'>
             <div>
                 <img src={`${house.urlHouse}`} className='img' alt='house' />
             </div>
