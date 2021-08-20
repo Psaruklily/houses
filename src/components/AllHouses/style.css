@@ -1,9 +1,9 @@
 .main-container {
-    background-color: rgb(225, 236, 236);
     display: flex;
     flex-wrap: wrap;
     /* width: 90vw; */
     max-width: 2000px;
     margin: 0 auto;
+    margin-left: -10px;
 }
 
