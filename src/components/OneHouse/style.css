@@ -1,11 +1,13 @@
 .img {
     width: 300px;
+    height: 200px;
 }
 
 .size-div {
     box-sizing: border-box;
-    width: 400px;
-    padding: 10px 50px;
+    width: 322px;
+    height: 285px;
+    padding: 10px;
 }
 
 .align {

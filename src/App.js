@@ -5,10 +5,12 @@ import {Header} from './components/Header';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Header />
       <hr className='line'/>
-      <Houses />
+      <div className='page-wrapper'>
+        <Houses />
+      </div>
     </div>
   );
 }
