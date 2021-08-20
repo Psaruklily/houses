@@ -1,13 +1,12 @@
 import React from 'react';
 import './style.css';
+import {ReactComponent as ElaraLogo} from '../../elara.svg';
 
 export const Header = () => {
     return (
         <div className='header'>
             <div className='logo'>
-                <a href='#' className='header-logo'>
-                    <span>elara</span>
-                </a>
+                <ElaraLogo />
             </div>
 
             <div className='header-input-container'>

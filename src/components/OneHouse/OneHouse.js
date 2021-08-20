@@ -13,7 +13,7 @@ export const OneHouse = (props) => {
 
                 <div className='align'>
                     <div className='align-first-line'>
-                        <div><span className='price'>{house.price}</span> <span>/mo</span></div>
+                        <div><span className='price'>{house.price}</span> <span className='address'>/mo</span></div>
                         <div className='align-first-line'>
                             <span className='font-bad-square'>{house.beds} beds</span>
                             <span className='font-bad-square'>{house.baths} baths</span>
