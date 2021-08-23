@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import {Houses} from './components/AllHouses';
 import {Header} from './components/Header';
 import {ButtonFilter} from './components/ButtonFilter';
 
 function App() {
+
   return (
     <div>
       <Header />
