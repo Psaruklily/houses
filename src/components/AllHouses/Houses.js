@@ -1,17 +1,25 @@
 import React from 'react';
-import allHouses from '../../data-houses';
 import {OneHouse} from '../../components/OneHouse';
 import './style.css';
 
-export const Houses = () => {
+import {
+    Link,
+    withRouter
+  } from "react-router-dom";
+
+ const Houses = (props) => {
+    const {houses, match:{url}} = props;
+    
     return(
         <div className='main-container'>
-            {allHouses.map(house => (
-                <OneHouse house={house} key={house._id}/>
+            {houses.map(house => (
+                <Link to={url + 'houses/' + house._id} key={house._id} className='text-decor'><OneHouse house={house}/></Link>
             ))}
         </div>
     )
 }
+
+export default withRouter(Houses);
 
 
 

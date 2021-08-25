@@ -2,8 +2,8 @@ import React from 'react';
 import './style.css';
 
 export const OneHouse = (props) => {
-    console.log(props);
     const {house} = props;
+    
     return(
             <div className='size-div'>
             <div>

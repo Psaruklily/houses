@@ -1,0 +1,12 @@
+.homesPageDesktop_filter {
+    box-sizing: border-box;
+    /* background: rgb(204, 226, 204); */
+    height: 74px;
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+  }
+
+.filter-buttons {
+    display: flex;
+}

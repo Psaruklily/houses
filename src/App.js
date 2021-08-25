@@ -1,27 +1,27 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import './App.css';
-import {Houses} from './components/AllHouses';
 import {Header} from './components/Header';
-import {ButtonFilter} from './components/ButtonFilter';
+import Home from './components/Home/Home';
+import HouseDetails from './components/House-details/HouseDetails';
 
-function App() {
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
+function App(props) {
+  
   return (
     <div>
       <Header />
       <hr className='line'/>
-
-      <div className='homesPageDesktop_filter'>
-        <div className='filter-buttons'>
-          <ButtonFilter text={'Beds and baths'}/>
-          <ButtonFilter text={'Price'}/>
-          <ButtonFilter text={'More filters'}/>
-        </div>
-      </div>
-        
-      <div className='page-wrapper'>
-        <Houses />
-      </div>
+      <Router>
+        <Switch>
+        <Route exact path='/houses/:id' component={HouseDetails}/> 
+        <Route exact path='/' component={Home}/>
+        </Switch>
+      </Router>
     </div>
   );
 }
