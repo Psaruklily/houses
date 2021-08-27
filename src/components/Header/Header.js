@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-import {ReactComponent as ElaraLogo} from '../../elara.svg';
+import {ReactComponent as ElaraLogo} from '../../assets/elara.svg';
 
 export const Header = () => {
     return (

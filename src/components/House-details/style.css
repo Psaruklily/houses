@@ -1,0 +1,78 @@
+.home-details-page {
+    max-width: 2000px;
+    background: rgb(221, 144, 144);
+}
+
+.home-details-content {
+    background: rgb(204, 207, 160);
+    width: 80vw;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 0 40px;
+}
+
+.home-details-page_description {
+    background: rgb(185, 182, 231);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.short-info {
+    background: rgb(166, 157, 190);
+}
+
+.per-month_wrapper {
+    background: rgb(214, 166, 206);
+}
+
+.schedule-visit_container {
+    width: 334px;
+    height: 82px;
+    background: rgb(138, 101, 121);
+}
+
+/*Block description inside*/
+
+.adress-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0px 0px 12px;
+}
+
+.home-metrics {
+    margin: 0px 0px 40px;
+}
+
+.home-metrics span {
+    margin: 0px 24px 0px 3px;
+}
+
+.metric-icon {
+    position: relative;
+    top: 2px;
+    right: 2px;
+}
+
+.truncated-text {
+    color: rgba(1,1,24,.87);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    overflow: hidden;
+}
+
+.description {
+    overflow-wrap: break-word;
+    height: 100px;
+}
+
+.read-more {
+    color: #009099;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+
+
