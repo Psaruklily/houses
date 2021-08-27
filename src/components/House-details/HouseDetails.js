@@ -3,6 +3,7 @@ import HousesService from '../../services/Houses-service';
 import {ReactComponent as Metric1} from '../../assets/metric1.svg';
 import {ReactComponent as Metric2} from '../../assets/metric2.svg';
 import {ReactComponent as Metric3} from '../../assets/metric3.svg';
+import {ReactComponent as Done} from '../../assets/done.svg';
 import './style.css';
 
 import {
@@ -29,6 +30,9 @@ const HouseDetails = (props) => {
         divEl.current.style.height = '100%';
         span.remove();
     }
+
+    const homeComes = houseDetails?.details?.homeComes;
+    console.log('homeCones', homeComes);
 
     return (
         <div className='home-details-page'>
@@ -110,6 +114,10 @@ const HouseDetails = (props) => {
                     <hr className='line1'/>
 
                     <h2 className='house-details-title'>This home comes with</h2>
+                    <div className='done-block'>
+                        {homeComes?.map(elem => <div><Done /><span className='list-item'>{elem}</span></div>)}
+                    </div>
+                    <hr className='line1'/>
 
                 </div>
 
