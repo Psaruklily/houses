@@ -9,6 +9,7 @@
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 0 40px;
+    position: relative;/*-----!!!!!!!!!!!!!!!!!!!-----------*/
 }
 
 .home-details-page_description {
@@ -24,12 +25,20 @@
 
 .per-month_wrapper {
     background: rgb(214, 166, 206);
+    box-sizing: border-box;
 }
 
 .schedule-visit_container {
     width: 334px;
     height: 82px;
     background: rgb(138, 101, 121);
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(1,1,24,.1);
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 /*Block description inside*/
@@ -64,7 +73,7 @@
 
 .description {
     overflow-wrap: break-word;
-    height: 100px;
+    height: 100пше px;
 }
 
 .read-more {
@@ -74,5 +83,71 @@
     cursor: pointer;
 }
 
+.schedule-button {
+    width: 171px;
+    height: 48px;
+    background-color: #009099;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
+.schedule-button span {
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.schedule-amount {
+    width: 68px;
+    height: 48px;
+    background: rgb(181, 219, 170);
+}
+
+.per-mo {
+    font-size: 14px;
+    color: rgba(1,1,24,.6);
+}
+
+.price-for-house {
+    color: #010118;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.line1 {
+    margin: 40px 0px;
+    border: 0;
+    height: 1px;
+    /* background: rgba(232, 236, 241, 1); */
+    background: black;
+}
+
+/*-------------------------------------------------------------------------------*/
+
+.house-details-title {
+    color: #010118;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 30px;
+}
+
+.home-info_table {
+    /* width: 80%; */
+    /* background: rgb(100, 66, 139); */
+}
+
+.home-info_table td {
+    padding: 0px 30px 30px 0px;
+    border: 1px solid black;
+    font-size: 16px;
+    color: rgba(1,1,24,.6);
+    line-height: 20px;
+}
+
+.home-info_table  tr:last-of-type > td {
+    padding: 0px 30px 0px 0px;
+}
 

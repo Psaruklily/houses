@@ -56,11 +56,63 @@ const HouseDetails = (props) => {
 
                     <div className='per-month_wrapper'>
                         <div className='schedule-visit_container'>
-                            <p>Test info</p>
+                            <div className='schedule-amount'><span className='price-for-house'>{houseDetails.price} </span><span className='per-mo'>per month</span></div>
+                            <div className='schedule-button'>
+                                <span>Schedule a visit</span>
+                            </div>
                         </div>
                     </div>
 
                 </div>
+                <hr className='line1' />
+
+                <h2 className='house-details-title'>Home details</h2>
+
+                <div className='home-info'>
+                    <div className='home-info_table'>
+                        <tr>
+                            <td>Type</td>
+                            <td>{houseDetails?.details?.homeDetails?.Type}</td>
+                        </tr>
+                        <tr>
+                            <td>Cooling</td>
+                            <td>{houseDetails?.details?.homeDetails?.Cooling}</td>
+                        </tr>
+                        <tr>
+                            <td>Heating</td>
+                            <td>{houseDetails?.details?.homeDetails?.Heating}</td>
+                        </tr>
+                        <tr>
+                            <td>Built</td>
+                            <td>{houseDetails?.details?.homeDetails?.Built}</td>
+                        </tr>
+                        <tr>
+                            <td>New Construction</td>
+                            <td>{houseDetails?.details?.homeDetails?.NewConstruction}</td>
+                        </tr>
+                        <tr>
+                            <td>Floor</td>
+                            <td>{houseDetails?.details?.homeDetails?.Floor}</td>
+                        </tr>
+                        <tr>
+                            <td>Other</td>
+                            <td>{houseDetails?.details?.homeDetails?.Other}</td>
+                        </tr>
+                        <tr>
+                            <td>For Sale Price</td>
+                            <td>{houseDetails?.details?.homeDetails?.ForSalePrice}</td>
+                        </tr>
+                        <tr>
+                            <td>Land Size</td>
+                            <td>{houseDetails?.details?.homeDetails?.LandSize}</td>
+                        </tr>
+                    </div>
+                    <hr className='line1'/>
+
+                    <h2 className='house-details-title'>This home comes with</h2>
+
+                </div>
+
             </div>
         </div>
     )
