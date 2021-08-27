@@ -4,6 +4,9 @@ import {ReactComponent as Metric1} from '../../assets/metric1.svg';
 import {ReactComponent as Metric2} from '../../assets/metric2.svg';
 import {ReactComponent as Metric3} from '../../assets/metric3.svg';
 import {ReactComponent as Done} from '../../assets/done.svg';
+import {ReactComponent as SchoolNearby1} from '../../assets/schoolNearby1.svg';
+import {ReactComponent as SchoolNearby2} from '../../assets/schoolNearby2.svg';
+import {ReactComponent as SchoolNearby3} from '../../assets/schoolNearby3.svg';
 import './style.css';
 
 import {
@@ -42,9 +45,9 @@ const HouseDetails = (props) => {
                     <div className='short-info'>
                         <h1 className='adress-title'>{houseDetails.address}, {houseDetails.ZIPcode}</h1>
                         <div className='home-metrics'>
-                            <span><Metric1 className='metric-icon'/>{houseDetails.beds} beds</span>
-                            <span><Metric2 className='metric-icon'/>{houseDetails.baths} baths</span>
-                            <span><Metric3 className='metric-icon'/>{houseDetails.square} sq.ft.</span>
+                            <span><Metric1 className='pos-icon'/>{houseDetails.beds} beds</span>
+                            <span><Metric2 className='pos-icon'/>{houseDetails.baths} baths</span>
+                            <span><Metric3 className='pos-icon'/>{houseDetails.square} sq.ft.</span>
                         </div>
 
                         <div className='truncated-text'>
@@ -119,6 +122,26 @@ const HouseDetails = (props) => {
                     </div>
                     <hr className='line1'/>
 
+                    <div className='schoolsNearby'>
+                        <h2>Schools nearby</h2>
+                        <div className='schoolsNearby_schools'>
+                            <div className='schoolNearby_school'>
+                                <div className='schoolNearby_school_type'><SchoolNearby1 className='pos-icon'/><span>High school</span></div>
+                                <hr className='line'/>
+                                <div className='schoolNearby_school_name'>Unspecified</div>
+                            </div>
+                            <div className='schoolNearby_school'>
+                                <div className='schoolNearby_school_type'><SchoolNearby2 className='pos-icon'/><span>Middle school</span></div>
+                                <hr className='line'/>
+                                <div className='schoolNearby_school_name'>Unspecified</div>
+                                </div>
+                            <div className='schoolNearby_school'>
+                                <div className='schoolNearby_school_type'><SchoolNearby3 className='pos-icon'/><span>Elementary school</span></div>
+                                <hr className='line'/>
+                                <div className='schoolNearby_school_name'>Unspecified</div>
+                                </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
