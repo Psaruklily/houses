@@ -1,37 +1,29 @@
 .home-details-page {
     max-width: 2000px;
-    background: rgb(221, 144, 144);
 }
 
 .home-details-content {
-    background: rgb(204, 207, 160);
     width: 80vw;
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 0 40px;
-    position: relative;/*-----!!!!!!!!!!!!!!!!!!!-----------*/
+    position: relative; 
+    margin-top: 30px;
 }
 
 .home-details-page_description {
-    background: rgb(185, 182, 231);
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.short-info {
-    background: rgb(166, 157, 190);
-}
-
 .per-month_wrapper {
-    background: rgb(214, 166, 206);
     box-sizing: border-box;
 }
 
 .schedule-visit_container {
     width: 334px;
     height: 82px;
-    background: rgb(138, 101, 121);
     padding: 16px;
     display: flex;
     justify-content: space-between;
@@ -73,7 +65,7 @@
 
 .description {
     overflow-wrap: break-word;
-    height: 100пше px;
+    height: 100px;
 }
 
 .read-more {
@@ -103,7 +95,6 @@
 .schedule-amount {
     width: 68px;
     height: 48px;
-    background: rgb(181, 219, 170);
 }
 
 .per-mo {
@@ -121,8 +112,7 @@
     margin: 40px 0px;
     border: 0;
     height: 1px;
-    /* background: rgba(232, 236, 241, 1); */
-    background: black;
+    background: rgba(232, 236, 241, 1);
 }
 
 /*-------------------------------------------------------------------------------*/
@@ -134,14 +124,8 @@
     margin: 0 0 30px;
 }
 
-.home-info_table {
-    /* width: 80%; */
-    /* background: rgb(100, 66, 139); */
-}
-
 .home-info_table td {
     padding: 0px 30px 30px 0px;
-    border: 1px solid black;
     font-size: 16px;
     color: rgba(1,1,24,.6);
     line-height: 20px;
@@ -192,4 +176,33 @@
     font-size: 16px;
     font-weight: 700;
 }
+
+.home-details-page_contacts_schedule_visit {
+    color: #009099;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.footer {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer div {
+    color: #858585;
+    font-size: 16px;
+    width: 50%;
+}
+
+.footer div p:last-of-type {
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 15px;
+    color: #858585;
+}
+
 

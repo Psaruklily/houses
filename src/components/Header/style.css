@@ -2,9 +2,9 @@
     /* background: rgb(228, 173, 173); */
     width: 100vw;
     height: 64px;
-    padding: 0px 32px;
     display: flex;
     align-items: center;
+    padding: 0px 32px;
 }
 
 .logo {

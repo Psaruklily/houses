@@ -8,7 +8,7 @@ import {ReactComponent as SchoolNearby1} from '../../assets/schoolNearby1.svg';
 import {ReactComponent as SchoolNearby2} from '../../assets/schoolNearby2.svg';
 import {ReactComponent as SchoolNearby3} from '../../assets/schoolNearby3.svg';
 import './style.css';
-
+import * as ReactBootStrap from 'react-bootstrap';
 import {
     withRouter
   } from "react-router-dom";
@@ -16,12 +16,15 @@ import {
 const HouseDetails = (props) => {
 
     const [houseDetails, setHouseDetails] = useState({});
+    const [loader, setLoader] = useState(false);
+
     const service = new HousesService();
     const {match:{params:{id}}} = props;
 
     useEffect(() => {
         service.getHouseDetails(id)
         .then(value => setHouseDetails(value));
+        setLoader(true);
     }, []);
 
     console.log('houseDetails', houseDetails);
@@ -38,7 +41,8 @@ const HouseDetails = (props) => {
     console.log('homeCones', homeComes);
 
     return (
-        <div className='home-details-page'>
+        <div>
+            <div className='home-details-page'>
             <div className='home-details-content'>
                 <div className='home-details-page_description'>
 
@@ -134,17 +138,40 @@ const HouseDetails = (props) => {
                                 <div className='schoolNearby_school_type'><SchoolNearby2 className='pos-icon'/><span>Middle school</span></div>
                                 <hr className='line'/>
                                 <div className='schoolNearby_school_name'>Unspecified</div>
-                                </div>
+                            </div>
                             <div className='schoolNearby_school'>
                                 <div className='schoolNearby_school_type'><SchoolNearby3 className='pos-icon'/><span>Elementary school</span></div>
                                 <hr className='line'/>
                                 <div className='schoolNearby_school_name'>Unspecified</div>
-                                </div>
+                            </div>
                         </div>
+                        <hr className='line1'/>
+
+                        <div className='home-details-page_contacts'>
+                            <p>
+                                <span>Interested in this house?</span>&nbsp;
+                                <span className='home-details-page_contacts_schedule_visit' role='button'>Schedule a visit now</span>
+                            </p>
+                            <p>
+                                <span>Or contact us at</span>&nbsp;
+                                <a href='#' className='home-details-page_contacts_schedule_visit'>support@elara.one</a>&nbsp;
+                                <span>if you have any questions.</span>
+                            </p>
+                        </div>
+
                     </div>
                 </div>
 
             </div>
+
+            <footer className='footer'>
+                <div>
+                    <p>© ElaraOne - 2021. All Rights Inclusive</p>
+                    <p>All property listing information is reproduced from the RealTracs and the MLS system, which reserves all copyrights and rights thereto. All listings have been selected by Picket, through its association with Omni Realtors & Property Management.</p>
+                </div>
+            </footer>
+            
+        </div>
         </div>
     )
 }

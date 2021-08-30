@@ -37,12 +37,17 @@
   }
 }
 
+.wrapper-all-content {
+  display: none;
+}
+
 .line {
   border: 0;
   height: 1px;
   background: rgba(232, 236, 241, 1);
   margin: 0px;
 }
+
 
 
 
