@@ -8,10 +8,8 @@ import {ReactComponent as SchoolNearby1} from '../../assets/schoolNearby1.svg';
 import {ReactComponent as SchoolNearby2} from '../../assets/schoolNearby2.svg';
 import {ReactComponent as SchoolNearby3} from '../../assets/schoolNearby3.svg';
 import './style.css';
-import * as ReactBootStrap from 'react-bootstrap';
-import {
-    withRouter
-  } from "react-router-dom";
+import {withRouter} from 'react-router-dom';
+import Loader from '../Loader/LoaderComponent'; 
 
 const HouseDetails = (props) => {
 
@@ -22,9 +20,12 @@ const HouseDetails = (props) => {
     const {match:{params:{id}}} = props;
 
     useEffect(() => {
-        service.getHouseDetails(id)
-        .then(value => setHouseDetails(value));
         setLoader(true);
+        setTimeout(() => {
+            service.getHouseDetails(id)
+            .then(value => setHouseDetails(value));
+            setLoader(false);
+        }, 1000)
     }, []);
 
     console.log('houseDetails', houseDetails);
@@ -42,6 +43,7 @@ const HouseDetails = (props) => {
 
     return (
         <div>
+            {loader && <Loader />}
             <div className='home-details-page'>
             <div className='home-details-content'>
                 <div className='home-details-page_description'>

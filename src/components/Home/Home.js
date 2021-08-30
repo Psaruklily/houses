@@ -3,11 +3,8 @@ import Houses from '../AllHouses/Houses';
 import {ButtonFilter} from '../ButtonFilter';
 import HousesService from '../../services/Houses-service';
 import './style.css';
-import * as ReactBootStrap from 'react-bootstrap';
-
-import {
-    withRouter
-  } from "react-router-dom";
+import Loader from '../Loader/LoaderComponent';
+import {withRouter} from "react-router-dom";
 
 const Home = () => {
 
@@ -17,12 +14,13 @@ const Home = () => {
     
     useEffect(() => {
         setLoader(true);
-        service.getHouses()
-        .then(value => {
-            setHouses(value)
-            setLoader(false);
-        });
-        
+        setTimeout(() => {
+            service.getHouses()
+            .then(value => {
+                setHouses(value)
+                setLoader(false);
+            });
+        }, 1000)
     },[]);
 
     return (
@@ -38,13 +36,10 @@ const Home = () => {
                 </div>
         
                 <div className='page-wrapper'>
-
-                {/* <Houses houses={houses}/> */}
-                    {!loader ? <Houses houses={houses}/> : <ReactBootStrap.Spinner animation="border" />}
-                    
+                    {loader && <Loader />}
+                    <Houses houses={houses}/>
                 </div>`
-            </div>
-           
+            </div>       
         </div>
     )
 }
