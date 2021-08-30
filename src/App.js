@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Header} from './components/Header';
+import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import HouseDetails from './components/House-details/HouseDetails';
 
@@ -13,9 +13,9 @@ import {
 function App() {
   return (
     <div>
-      <Header />
-      <hr className='line'/>
       <Router>
+        <Header />
+        <hr className='line'/>
         <Switch>
         <Route exact path='/houses/:id' component={HouseDetails}/> 
         <Route exact path='/' component={Home}/>

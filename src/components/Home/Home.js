@@ -25,7 +25,6 @@ const Home = () => {
 
     return (
         <div>
-          
             <div className='wrapper-for-homeContent'>
 `               <div className='homesPageDesktop_filter'>
                     <div className='filter-buttons'>

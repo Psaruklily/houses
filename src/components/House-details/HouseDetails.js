@@ -39,7 +39,6 @@ const HouseDetails = (props) => {
     }
 
     const homeComes = houseDetails?.details?.homeComes;
-    console.log('homeCones', homeComes);
 
     return (
         <div>
@@ -83,48 +82,53 @@ const HouseDetails = (props) => {
 
                 <div className='home-info'>
                     <div className='home-info_table'>
-                        <tr>
-                            <td>Type</td>
-                            <td>{houseDetails?.details?.homeDetails?.Type}</td>
-                        </tr>
-                        <tr>
-                            <td>Cooling</td>
-                            <td>{houseDetails?.details?.homeDetails?.Cooling}</td>
-                        </tr>
-                        <tr>
-                            <td>Heating</td>
-                            <td>{houseDetails?.details?.homeDetails?.Heating}</td>
-                        </tr>
-                        <tr>
-                            <td>Built</td>
-                            <td>{houseDetails?.details?.homeDetails?.Built}</td>
-                        </tr>
-                        <tr>
-                            <td>New Construction</td>
-                            <td>{houseDetails?.details?.homeDetails?.NewConstruction}</td>
-                        </tr>
-                        <tr>
-                            <td>Floor</td>
-                            <td>{houseDetails?.details?.homeDetails?.Floor}</td>
-                        </tr>
-                        <tr>
-                            <td>Other</td>
-                            <td>{houseDetails?.details?.homeDetails?.Other}</td>
-                        </tr>
-                        <tr>
-                            <td>For Sale Price</td>
-                            <td>{houseDetails?.details?.homeDetails?.ForSalePrice}</td>
-                        </tr>
-                        <tr>
-                            <td>Land Size</td>
-                            <td>{houseDetails?.details?.homeDetails?.LandSize}</td>
-                        </tr>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Type</td>
+                                    <td>{houseDetails?.details?.homeDetails?.Type}</td>
+                                </tr>
+                                <tr>
+                                    <td>Cooling</td>
+                                    <td>{houseDetails?.details?.homeDetails?.Cooling}</td>
+                                </tr>
+                                <tr>
+                                    <td>Heating</td>
+                                    <td>{houseDetails?.details?.homeDetails?.Heating}</td>
+                                </tr>
+                                <tr>
+                                    <td>Built</td>
+                                    <td>{houseDetails?.details?.homeDetails?.Built}</td>
+                                </tr>
+                                <tr>
+                                    <td>New Construction</td>
+                                    <td>{houseDetails?.details?.homeDetails?.NewConstruction}</td>
+                                </tr>
+                                <tr>
+                                    <td>Floor</td>
+                                    <td>{houseDetails?.details?.homeDetails?.Floor}</td>
+                                </tr>
+                                <tr>
+                                    <td>Other</td>
+                                    <td>{houseDetails?.details?.homeDetails?.Other}</td>
+                                </tr>
+                                <tr>
+                                    <td>For Sale Price</td>
+                                    <td>{houseDetails?.details?.homeDetails?.ForSalePrice}</td>
+                                </tr>
+                                <tr>
+                                    <td>Land Size</td>
+                                    <td>{houseDetails?.details?.homeDetails?.LandSize}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
                     </div>
                     <hr className='line1'/>
 
                     <h2 className='house-details-title'>This home comes with</h2>
                     <div className='done-block'>
-                        {homeComes?.map(elem => <div><Done /><span className='list-item'>{elem}</span></div>)}
+                        {homeComes?.map((elem, index) => <div key={index}><Done /><span className='list-item'>{elem}</span></div>)}
                     </div>
                     <hr className='line1'/>
 
