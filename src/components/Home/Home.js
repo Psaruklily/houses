@@ -6,9 +6,10 @@ import './style.css';
 import Loader from '../Loader/LoaderComponent';
 import {withRouter} from "react-router-dom";
 
-const Home = () => {
+const Home = ({textFromInput}) => {
 
-    const [houses, setHouses] = useState([]);
+    const [allHouses, setAllHouses] = useState([]);
+    const [filteredHouses, setFilteredHouses] = useState(allHouses);
     const [loader, setLoader] = useState(false);
     const service = new HousesService();
     
@@ -17,11 +18,20 @@ const Home = () => {
         setTimeout(() => {
             service.getHouses()
             .then(value => {
-                setHouses(value)
+                setAllHouses(value);
+                setFilteredHouses(value);
                 setLoader(false);
             });
         }, 1000)
     },[]);
+
+    useEffect(() => {
+        let result = [];
+        result = allHouses.filter(house => {
+            return house.address.toLowerCase().search(textFromInput) !== -1;
+        })
+        setFilteredHouses(result);
+    }, [textFromInput])
 
     return (
         <div>
@@ -36,7 +46,7 @@ const Home = () => {
         
                 <div className='page-wrapper'>
                     {loader && <Loader />}
-                    <Houses houses={houses}/>
+                    <Houses houses={filteredHouses}/>
                 </div>`
             </div>       
         </div>
