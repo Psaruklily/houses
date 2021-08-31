@@ -29,7 +29,7 @@ const Home = ({textFromInput}) => {
         let result = [];
         result = allHouses.filter(house => {
             return house.address.toLowerCase().search(textFromInput) !== -1;
-        })
+        });
         setFilteredHouses(result);
     }, [textFromInput])
 
@@ -43,8 +43,9 @@ const Home = ({textFromInput}) => {
                         <ButtonFilter text={'More filters'}/>
                     </div>
                 </div>
-        
+   
                 <div className='page-wrapper'>
+                    {filteredHouses.length === 0 && <p className='not-available'>0 home available</p>}
                     {loader && <Loader />}
                     <Houses houses={filteredHouses}/>
                 </div>`

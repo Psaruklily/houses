@@ -19,10 +19,10 @@ function App() {
         <Header onChange={(e) => setTextFromInput(e.target.value.toLowerCase())}/>
         <hr className='line'/>
         <Switch>
-        <Route exact path='/houses/:id' component={HouseDetails}/> 
-        <Route exact path='/'>
-          <Home textFromInput = {textFromInput}/>
-        </Route>
+          <Route exact path='/houses/:id' component={HouseDetails}/> 
+          <Route exact path='/'>
+            <Home textFromInput = {textFromInput}/>
+          </Route>
         </Switch>
       </Router>
     </div>
