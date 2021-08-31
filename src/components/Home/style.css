@@ -16,3 +16,11 @@
   font-size: 16px;
   color: rgba(1,1,24,.6);
 }
+
+.filter-dropdown-menu {
+  background: rgb(240, 220, 220);
+  height: 200px;
+  width: 197px;
+  position: relative;
+  bottom: 15px;
+}
