@@ -41,8 +41,8 @@ const Home = ({textFromInput}, props) => {
     const [allHouses, setAllHouses] = useState([]);
     const [filteredHouses, setFilteredHouses] = useState(allHouses);
     const [loader, setLoader] = useState(false);
-    // const [query, setQuery] = useState(1);
-    const history = useHistory()
+    const history = useHistory();
+    const [isOpen, setIsOpen] = useState(false);
     const service = new HousesService();
     
     useEffect(() => {
@@ -73,6 +73,8 @@ const Home = ({textFromInput}, props) => {
         history.push(`/houses/?${query}`);
     }
 
+    const toggling = () => setIsOpen(!isOpen);
+
     console.log(filteredHouses);
     // console.log('Select', document.querySelector('.test1').innerHTML);
     
@@ -96,16 +98,19 @@ const Home = ({textFromInput}, props) => {
 
                             <div className='filter-dropdown-menu_filters_wrapper-child-cont'>
                                 <div className='filter-dropdown-menu_filters_label'>Beds</div>
-                                <DropDownContainer>
-                                    <DropDownHeader className='test1'>1</DropDownHeader>
-                                    <DropDownListContainer>
-                                        <DropDownList>
-                                            <ListItem>2</ListItem>
-                                            <ListItem>3</ListItem>
-                                            <ListItem>4</ListItem>
-                                        </DropDownList>
-                                    </DropDownListContainer>
-                                </DropDownContainer>
+                                
+                                       <DropDownContainer>
+                                       <DropDownHeader className='test1' onClick={toggling}>1</DropDownHeader>
+                                       {isOpen && (
+                                           <DropDownListContainer>
+                                           <DropDownList>
+                                               <ListItem>2</ListItem>
+                                               <ListItem>3</ListItem>
+                                               <ListItem>4</ListItem>
+                                           </DropDownList>
+                                       </DropDownListContainer>
+                                       )}
+                                   </DropDownContainer>
                             </div>
 
                             
