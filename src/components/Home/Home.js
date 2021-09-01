@@ -9,6 +9,7 @@ import {withRouter, useHistory} from "react-router-dom";
 import styled from 'styled-components';
 const DropDownContainer = styled("div")`
 width: 85px;
+position: relative;
 margin: 0 auto;`;
 const DropDownHeader = styled("div")`
 margin-bottom: 5px;
@@ -17,10 +18,13 @@ box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
 font-weight: 500;
 font-size: 14px;
 color: #010118;
+cursor: pointer;
 background: #ffffff`;
 const DropDownListContainer = styled("div")``;
 const DropDownList = styled("ul")`
   padding: 0;
+  position: absolute;
+  width: 100%;
   margin: 0;
   padding-left: 5px;
   background: #ffffff;
@@ -34,7 +38,10 @@ const DropDownList = styled("ul")`
   }`;
 const ListItem = styled("li")`
 list-style: none;
-  margin-bottom: 5px;`;
+cursor: pointer;
+margin-bottom: 5px;`;
+
+  const options = [1, 2, 3, 4];
 
 const Home = ({textFromInput}, props) => {
 
@@ -43,6 +50,7 @@ const Home = ({textFromInput}, props) => {
     const [loader, setLoader] = useState(false);
     const history = useHistory();
     const [isOpen, setIsOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(null);
     const service = new HousesService();
     
     useEffect(() => {
@@ -68,16 +76,18 @@ const Home = ({textFromInput}, props) => {
 
     const saveBeds = () => {
         const query = new URLSearchParams();
-        const value = document.getElementById('beds').value;
-        query.set("beds", value);
+        query.set('beds', selectedOption);
         history.push(`/houses/?${query}`);
     }
 
     const toggling = () => setIsOpen(!isOpen);
 
+    const onOptionClicked = value => () => {
+        setSelectedOption(value);
+        setIsOpen(false);
+    }
+
     console.log(filteredHouses);
-    // console.log('Select', document.querySelector('.test1').innerHTML);
-    
 
     return (
         <div>
@@ -92,7 +102,6 @@ const Home = ({textFromInput}, props) => {
    
                 <div className='page-wrapper'>
 
-
                     <div className='filter-dropdown-menu'>
                         <div className='filter-dropdown-menu_filters'>
 
@@ -100,33 +109,20 @@ const Home = ({textFromInput}, props) => {
                                 <div className='filter-dropdown-menu_filters_label'>Beds</div>
                                 
                                        <DropDownContainer>
-                                       <DropDownHeader className='test1' onClick={toggling}>1</DropDownHeader>
+                                       <DropDownHeader className='test1' onClick={toggling}>{selectedOption || 1}</DropDownHeader>
                                        {isOpen && (
                                            <DropDownListContainer>
                                            <DropDownList>
-                                               <ListItem>2</ListItem>
-                                               <ListItem>3</ListItem>
-                                               <ListItem>4</ListItem>
+                                               {options.map(option => (
+                                                   <ListItem onClick={onOptionClicked(option)} key={Math.random()}>{option}</ListItem>
+                                               ))}
                                            </DropDownList>
                                        </DropDownListContainer>
                                        )}
                                    </DropDownContainer>
                             </div>
 
-                            
-
-
-
-                                {/* <div className='filter-dropdown-menu_filters_label'>Beds</div>
-                                <div className='select'>
-                                    <select name='beds' id='beds'>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
-                                </div> */}
-                            
+                        
 
                             {/* <div className='filter-dropdown-menu_filters_wrapper-child-cont'>
                                 <div className='filter-dropdown-menu_filters_label'>Baths</div>
@@ -146,7 +142,6 @@ const Home = ({textFromInput}, props) => {
                         </div>
                         <div className='filter-dropdown-menu_buttons'></div>
                     </div>
-
 
                     {filteredHouses.length === 0 && <p className='not-available'>0 home available</p>}
                     {loader && <Loader />}
