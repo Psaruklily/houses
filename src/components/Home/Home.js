@@ -5,43 +5,7 @@ import HousesService from '../../services/Houses-service';
 import './style.css';
 import Loader from '../Loader/LoaderComponent';
 import {withRouter, useHistory} from "react-router-dom";
-
-import styled from 'styled-components';
-const DropDownContainer = styled("div")`
-width: 85px;
-position: relative;
-margin: 0 auto;`;
-const DropDownHeader = styled("div")`
-margin-bottom: 5px;
-padding: 5px;
-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
-font-weight: 500;
-font-size: 14px;
-color: #010118;
-cursor: pointer;
-background: #ffffff`;
-const DropDownListContainer = styled("div")``;
-const DropDownList = styled("ul")`
-  padding: 0;
-  position: absolute;
-  width: 100%;
-  margin: 0;
-  padding-left: 5px;
-  background: #ffffff;
-  border: 2px solid #e5e5e5;
-  box-sizing: border-box;
-  color: #010118;
-  font-size: 14px;
-  font-weight: 300;
-  &:first-child {
-    padding-top: 5px;
-  }`;
-const ListItem = styled("li")`
-list-style: none;
-cursor: pointer;
-margin-bottom: 5px;`;
-
-  const options = [1, 2, 3, 4];
+import Select from '../Select/Select';
 
 const Home = ({textFromInput}, props) => {
 
@@ -49,10 +13,9 @@ const Home = ({textFromInput}, props) => {
     const [filteredHouses, setFilteredHouses] = useState(allHouses);
     const [loader, setLoader] = useState(false);
     const history = useHistory();
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [beds, setBeds] = useState(null); 
     const service = new HousesService();
-    
+
     useEffect(() => {
         setLoader(true);
         setTimeout(() => {
@@ -73,21 +36,11 @@ const Home = ({textFromInput}, props) => {
         setFilteredHouses(result);
     }, [textFromInput]);
 
-
     const saveBeds = () => {
         const query = new URLSearchParams();
-        query.set('beds', selectedOption);
+        query.set('beds', beds);
         history.push(`/houses/?${query}`);
     }
-
-    const toggling = () => setIsOpen(!isOpen);
-
-    const onOptionClicked = value => () => {
-        setSelectedOption(value);
-        setIsOpen(false);
-    }
-
-    console.log(filteredHouses);
 
     return (
         <div>
@@ -107,37 +60,9 @@ const Home = ({textFromInput}, props) => {
 
                             <div className='filter-dropdown-menu_filters_wrapper-child-cont'>
                                 <div className='filter-dropdown-menu_filters_label'>Beds</div>
-                                
-                                       <DropDownContainer>
-                                       <DropDownHeader className='test1' onClick={toggling}>{selectedOption || 1}</DropDownHeader>
-                                       {isOpen && (
-                                           <DropDownListContainer>
-                                           <DropDownList>
-                                               {options.map(option => (
-                                                   <ListItem onClick={onOptionClicked(option)} key={Math.random()}>{option}</ListItem>
-                                               ))}
-                                           </DropDownList>
-                                       </DropDownListContainer>
-                                       )}
-                                   </DropDownContainer>
+                                    <Select selectBeds={beds} setSelectedBeds={setBeds}/>
                             </div>
 
-                        
-
-                            {/* <div className='filter-dropdown-menu_filters_wrapper-child-cont'>
-                                <div className='filter-dropdown-menu_filters_label'>Baths</div>
-                                <div className='select'>
-                                    <select name='beds' id='baths'>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
-                                </div>
-                            </div> */}
-                            
-                            
-                          
                             <input type="submit" value="Save" onClick={saveBeds}></input>
                         </div>
                         <div className='filter-dropdown-menu_buttons'></div>
