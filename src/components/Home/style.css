@@ -24,3 +24,16 @@
   position: relative;
   bottom: 15px;
 }
+
+.filter-dropdown-menu_filters {
+  padding: 20px 16px;
+}
+
+.filter-dropdown-menu_filters_wrapper-child-cont {
+  display: flex;
+}
+
+/* .select {
+  width: 200px;;
+} */
+

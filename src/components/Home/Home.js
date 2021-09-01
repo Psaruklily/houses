@@ -6,6 +6,36 @@ import './style.css';
 import Loader from '../Loader/LoaderComponent';
 import {withRouter, useHistory} from "react-router-dom";
 
+import styled from 'styled-components';
+const DropDownContainer = styled("div")`
+width: 85px;
+margin: 0 auto;`;
+const DropDownHeader = styled("div")`
+margin-bottom: 5px;
+padding: 5px;
+box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+font-weight: 500;
+font-size: 14px;
+color: #010118;
+background: #ffffff`;
+const DropDownListContainer = styled("div")``;
+const DropDownList = styled("ul")`
+  padding: 0;
+  margin: 0;
+  padding-left: 5px;
+  background: #ffffff;
+  border: 2px solid #e5e5e5;
+  box-sizing: border-box;
+  color: #010118;
+  font-size: 14px;
+  font-weight: 300;
+  &:first-child {
+    padding-top: 5px;
+  }`;
+const ListItem = styled("li")`
+list-style: none;
+  margin-bottom: 5px;`;
+
 const Home = ({textFromInput}, props) => {
 
     const [allHouses, setAllHouses] = useState([]);
@@ -34,7 +64,7 @@ const Home = ({textFromInput}, props) => {
         });
         setFilteredHouses(result);
     }, [textFromInput]);
-    
+
 
     const saveBeds = () => {
         const query = new URLSearchParams();
@@ -42,6 +72,10 @@ const Home = ({textFromInput}, props) => {
         query.set("beds", value);
         history.push(`/houses/?${query}`);
     }
+
+    console.log(filteredHouses);
+    // console.log('Select', document.querySelector('.test1').innerHTML);
+    
 
     return (
         <div>
@@ -59,13 +93,50 @@ const Home = ({textFromInput}, props) => {
 
                     <div className='filter-dropdown-menu'>
                         <div className='filter-dropdown-menu_filters'>
-                            <label for='beds'>Beds:</label>
-                            <select name='beds' id='beds'>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select><br/><br/>
+
+                            <div className='filter-dropdown-menu_filters_wrapper-child-cont'>
+                                <div className='filter-dropdown-menu_filters_label'>Beds</div>
+                                <DropDownContainer>
+                                    <DropDownHeader className='test1'>1</DropDownHeader>
+                                    <DropDownListContainer>
+                                        <DropDownList>
+                                            <ListItem>2</ListItem>
+                                            <ListItem>3</ListItem>
+                                            <ListItem>4</ListItem>
+                                        </DropDownList>
+                                    </DropDownListContainer>
+                                </DropDownContainer>
+                            </div>
+
+                            
+
+
+
+                                {/* <div className='filter-dropdown-menu_filters_label'>Beds</div>
+                                <div className='select'>
+                                    <select name='beds' id='beds'>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                    </select>
+                                </div> */}
+                            
+
+                            {/* <div className='filter-dropdown-menu_filters_wrapper-child-cont'>
+                                <div className='filter-dropdown-menu_filters_label'>Baths</div>
+                                <div className='select'>
+                                    <select name='beds' id='baths'>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                    </select>
+                                </div>
+                            </div> */}
+                            
+                            
+                          
                             <input type="submit" value="Save" onClick={saveBeds}></input>
                         </div>
                         <div className='filter-dropdown-menu_buttons'></div>
