@@ -14,14 +14,17 @@ const Home = (props, {textFromInput}) => {
     const [loader, setLoader] = useState(false);
     const history = useHistory();
     const [beds, setBeds] = useState(null); 
+    const [baths, setBaths] = useState(null);
     const [numBeds, setNumBeds] = useState(null);
+    const [numBaths, setNumBaths] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
 
     const service = new HousesService();
 
     useEffect(() => {
         setLoader(true);
         setTimeout(() => {
-            service.getHouses(numBeds)
+            service.getHouses(numBeds, numBaths)
             .then(value => {
                 console.log(value)
                 setAllHouses(value);
@@ -29,7 +32,7 @@ const Home = (props, {textFromInput}) => {
                 setLoader(false);
             });
         }, 1000)
-    },[numBeds]);
+    },[numBeds, numBaths]);
     
 
     useEffect(() => {
@@ -40,12 +43,18 @@ const Home = (props, {textFromInput}) => {
         setFilteredHouses(result);
     }, [textFromInput]);
 
-    const saveBeds = () => {
+    const save = () => {
         const query = new URLSearchParams();
         query.set('beds', beds);
+        query.set('baths', baths);
         history.push(`/?${query}`);
-        console.log(beds)
+        setIsOpen(!isOpen);
         setNumBeds(beds);
+        setNumBaths(baths);
+    }
+
+    const closeModal = () => {
+        setIsOpen(!isOpen);
     }
 
     return (
@@ -53,7 +62,7 @@ const Home = (props, {textFromInput}) => {
             <div className='wrapper-for-homeContent'>
 `               <div className='homesPageDesktop_filter'>
                     <div className='filter-buttons'>
-                        <ButtonFilter text={'Beds and baths'}/>
+                        <ButtonFilter onChildClick={closeModal} text={'Beds and baths'}/>
                         <ButtonFilter text={'Price'}/>
                         <ButtonFilter text={'More filters'}/>
                     </div>
@@ -61,18 +70,34 @@ const Home = (props, {textFromInput}) => {
    
                 <div className='page-wrapper'>
 
-                    <div className='filter-dropdown-menu'>
+                    {isOpen && (<div className='filter-dropdown-menu'>
                         <div className='filter-dropdown-menu_filters'>
-
                             <div className='filter-dropdown-menu_filters_wrapper-child-cont'>
                                 <div className='filter-dropdown-menu_filters_label'>Beds</div>
-                                    <Select selectBeds={beds} setSelectedBeds={setBeds}/>
+                                <div>
+                                    <Select setSelectedBeds={setBeds}/>
+                                </div>
                             </div>
 
-                            <input type="submit" value="Save" onClick={saveBeds}></input>
+                            <div className='filter-dropdown-menu_filters_wrapper-child-cont'>
+                                <div className='filter-dropdown-menu_filters_label'>Baths</div>
+                                <div>
+                                    <Select setSelectedBeds={setBaths}/>
+                                </div>
+                            </div>
                         </div>
-                        <div className='filter-dropdown-menu_buttons'></div>
-                    </div>
+                        <hr className='line'/>
+                        
+                        <div className='filter-dropdown-menu_buttons'>
+                            <div onClick={closeModal} className='filter-dropdown-menu_buttons-reset'>
+                                <span>Reset</span>
+                            </div>
+                            <div role='button' onClick={save} className='filter-dropdown-menu_buttons-save'>
+                                <span>Save</span>
+                            </div>
+                        </div>
+                    </div>)
+}                      
 
                     {filteredHouses.length === 0 && <p className='not-available'>0 home available</p>}
                     {loader && <Loader />}

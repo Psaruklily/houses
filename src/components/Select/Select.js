@@ -7,17 +7,24 @@ position: relative;
 margin: 0 auto;`;
 const DropDownHeader = styled("div")`
 margin-bottom: 5px;
+height: 36px;
 padding: 5px;
 box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
 font-weight: 500;
 font-size: 14px;
 color: #010118;
 cursor: pointer;
+box-sizing: border-box;
+display: flex;
+align-items: center;
+border: 1px solid rgb(196, 196, 196);
+border-radius: 1px;
 background: #ffffff`;
 const DropDownListContainer = styled("div")``;
 const DropDownList = styled("ul")`
   padding: 0;
   position: absolute;
+  z-index: 2;
   width: 100%;
   margin: 0;
   padding-left: 5px;
