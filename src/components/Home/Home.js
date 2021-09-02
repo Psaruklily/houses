@@ -7,26 +7,30 @@ import Loader from '../Loader/LoaderComponent';
 import {withRouter, useHistory} from "react-router-dom";
 import Select from '../Select/Select';
 
-const Home = ({textFromInput}, props) => {
+const Home = (props, {textFromInput}) => {
 
     const [allHouses, setAllHouses] = useState([]);
     const [filteredHouses, setFilteredHouses] = useState(allHouses);
     const [loader, setLoader] = useState(false);
     const history = useHistory();
     const [beds, setBeds] = useState(null); 
+    const [numBeds, setNumBeds] = useState(null);
+
     const service = new HousesService();
 
     useEffect(() => {
         setLoader(true);
         setTimeout(() => {
-            service.getHouses()
+            service.getHouses(numBeds)
             .then(value => {
+                console.log(value)
                 setAllHouses(value);
                 setFilteredHouses(value);
                 setLoader(false);
             });
         }, 1000)
-    },[]);
+    },[numBeds]);
+    
 
     useEffect(() => {
         let result = [];
@@ -39,7 +43,9 @@ const Home = ({textFromInput}, props) => {
     const saveBeds = () => {
         const query = new URLSearchParams();
         query.set('beds', beds);
-        history.push(`/houses/?${query}`);
+        history.push(`/?${query}`);
+        console.log(beds)
+        setNumBeds(beds);
     }
 
     return (

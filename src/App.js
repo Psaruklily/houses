@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import HouseDetails from './components/House-details/HouseDetails';
+import { QueryParamProvider } from 'use-query-params';
 
 import {
   BrowserRouter as Router,
@@ -16,14 +17,16 @@ function App() {
   return (
     <div>
       <Router>
-        <Header onChange={(e) => setTextFromInput(e.target.value.toLowerCase())}/>
-        <hr className='line'/>
-        <Switch>
-          <Route exact path='/houses/:id' component={HouseDetails}/> 
-          <Route exact path='/'>
-            <Home textFromInput = {textFromInput}/>
-          </Route>
-        </Switch>
+        {/* <QueryParamProvider ReactRouterRoute={Route}> */}
+          <Header onChange={(e) => setTextFromInput(e.target.value.toLowerCase())}/>
+          <hr className='line'/>
+          <Switch>
+            <Route exact path='/houses/:id' component={HouseDetails}/> 
+            <Route exact path='/'>
+              <Home textFromInput = {textFromInput}/>
+            </Route>
+          </Switch>
+        {/* </QueryParamProvider> */}
       </Router>
     </div>
   );
