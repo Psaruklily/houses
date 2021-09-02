@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import Houses from '../AllHouses/Houses';
 import {ButtonFilter} from '../ButtonFilter';
 import HousesService from '../../services/Houses-service';
@@ -6,6 +6,8 @@ import './style.css';
 import Loader from '../Loader/LoaderComponent';
 import {withRouter, useHistory} from "react-router-dom";
 import Select from '../Select/Select';
+
+
 
 const Home = (props, {textFromInput}) => {
 
@@ -18,6 +20,8 @@ const Home = (props, {textFromInput}) => {
     const [numBeds, setNumBeds] = useState(null);
     const [numBaths, setNumBaths] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
+    const wrapperRef = useRef(null);
+    useOutsideAlerter(wrapperRef);
 
     const service = new HousesService();
 
@@ -57,6 +61,21 @@ const Home = (props, {textFromInput}) => {
         setIsOpen(!isOpen);
     }
 
+    function useOutsideAlerter(ref) {
+        useEffect(() => {
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setIsOpen(false);
+                }
+            }
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+
     return (
         <div>
             <div className='wrapper-for-homeContent'>
@@ -70,7 +89,7 @@ const Home = (props, {textFromInput}) => {
    
                 <div className='page-wrapper'>
 
-                    {isOpen && (<div className='filter-dropdown-menu'>
+                    {isOpen && (<div className='filter-dropdown-menu' ref={wrapperRef}>
                         <div className='filter-dropdown-menu_filters'>
                             <div className='filter-dropdown-menu_filters_wrapper-child-cont'>
                                 <div className='filter-dropdown-menu_filters_label'>Beds</div>
@@ -96,8 +115,8 @@ const Home = (props, {textFromInput}) => {
                                 <span>Save</span>
                             </div>
                         </div>
-                    </div>)
-}                      
+                    </div>)}
+                      
 
                     {filteredHouses.length === 0 && <p className='not-available'>0 home available</p>}
                     {loader && <Loader />}
