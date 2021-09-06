@@ -35,6 +35,9 @@ import Select from '../Select/Select';
 
 
 const Home = ({textFromInput}) => {
+
+//   console.log('textFromInput', textFromInput);
+
     const query = new URLSearchParams(window.location.search);
     
     const [allHouses, setAllHouses] = useState([]);
@@ -46,6 +49,10 @@ const Home = ({textFromInput}) => {
     const [isOpen, setIsOpen] = useState(false);
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
+
+    const queryFromHeader = new URLSearchParams(document.location.search.substring(1));
+    const res = queryFromHeader.get('address');
+    console.log(res);
 
     const service = new HousesService();
 
@@ -65,13 +72,13 @@ const Home = ({textFromInput}) => {
         getHome();
     },[]);
 
-    useEffect(() => {
-        let result = [];
-        result = allHouses.filter(house => {
-            return house.address.toLowerCase().search(textFromInput) !== -1;
-        });
-        setFilteredHouses(result);
-    }, [textFromInput]);
+    // useEffect(() => {
+    //     let result = [];
+    //     result = allHouses.filter(house => {
+    //         return house.address.toLowerCase().search(textFromInput) !== -1;
+    //     });
+    //     setFilteredHouses(result);
+    // }, [textFromInput]);
 
     const save = () => {
         const query = new URLSearchParams();
@@ -79,9 +86,9 @@ const Home = ({textFromInput}) => {
         query.set('baths', baths);
         history.push(`/?${query}`);
         setBeds(beds);
-        setBaths(baths)
+        setBaths(baths);
         setIsOpen(!isOpen);
-        getHome()
+        getHome();
     }
 
     const closeModal = () => {

@@ -16,12 +16,12 @@ function App() {
   return (
     <div>
       <Router>
-          <Header onChange={(e) => setTextFromInput(e.target.value.toLowerCase())}/>
+          <Header />
           <hr className='line'/>
           <Switch>
             <Route exact path='/houses/:id' component={HouseDetails}/> 
             <Route exact path='/'>
-              <Home textFromInput = {textFromInput}/>
+              <Home />
             </Route>
           </Switch>
       </Router>
@@ -30,3 +30,6 @@ function App() {
 }
 
 export default App;
+
+// onChange={(e) => setTextFromInput(e.target.value.toLowerCase())}     header
+// textFromInput = {textFromInput}    home
