@@ -61,6 +61,7 @@ const Home = ({textFromInput}) => {
         setTimeout(() => {
             service.getHouses({beds, baths})
             .then(value => {
+                console.log('!!!!!!!!!!!!!!!!!', value)
                 setAllHouses(value);
                 setFilteredHouses(value);
                 setLoader(false);

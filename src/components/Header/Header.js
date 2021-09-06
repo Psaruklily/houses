@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import './style.css';
 import {ReactComponent as ElaraLogo} from '../../assets/elara.svg';
 import {Link, useHistory} from "react-router-dom";
+import HousesService from '../../services/Houses-service';
+
+const service = new HousesService();
 
 const Header = ({onChange}) => {
 
@@ -16,6 +19,9 @@ const Header = ({onChange}) => {
         const query = new URLSearchParams();
         query.set('address', inputValue);
         history.push(`/?${query}`);
+        const address = query.get('address');
+        console.log('address--------', address)
+        service.getHouses({address});
     }
 
     return (
