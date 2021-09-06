@@ -7,37 +7,63 @@ import Loader from '../Loader/LoaderComponent';
 import {withRouter, useHistory} from "react-router-dom";
 import Select from '../Select/Select';
 
+// const Dropdown = ({ children }) => {
+//     const wrapperRef = React.useRef(null);
+//     return (
+//         <div ref={wrapperRef}>
+//             { children }
+//         </div>
+//     );
+// }
+
+// const Content1 = () => (
+//     <div>filter 1</div>
+// )
+
+// const HomeOther = () => (
+//     <>
+//     <Dropdown>
+//         <Content1 />
+//     </Dropdown>
+//     <Dropdown>
+//         <Content1 />
+//     </Dropdown>
+//     </>
+
+// )
 
 
-const Home = (props, {textFromInput}) => {
 
+const Home = ({textFromInput}) => {
+    const query = new URLSearchParams(window.location.search);
+    
     const [allHouses, setAllHouses] = useState([]);
     const [filteredHouses, setFilteredHouses] = useState(allHouses);
     const [loader, setLoader] = useState(false);
     const history = useHistory();
-    const [beds, setBeds] = useState(null); 
-    const [baths, setBaths] = useState(null);
-    const [numBeds, setNumBeds] = useState(null);
-    const [numBaths, setNumBaths] = useState(null);
+    const [beds, setBeds] = useState(query.get('beds') || null);
+    const [baths, setBaths] = useState(query.get('baths') || null);
     const [isOpen, setIsOpen] = useState(false);
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
 
     const service = new HousesService();
 
-    useEffect(() => {
+    const getHome = () => {
         setLoader(true);
         setTimeout(() => {
-            service.getHouses(numBeds, numBaths)
+            service.getHouses({beds, baths})
             .then(value => {
-                console.log(value)
                 setAllHouses(value);
                 setFilteredHouses(value);
                 setLoader(false);
             });
         }, 1000)
-    },[numBeds, numBaths]);
-    
+    }
+
+    useEffect(() => {
+        getHome();
+    },[]);
 
     useEffect(() => {
         let result = [];
@@ -52,9 +78,10 @@ const Home = (props, {textFromInput}) => {
         query.set('beds', beds);
         query.set('baths', baths);
         history.push(`/?${query}`);
+        setBeds(beds);
+        setBaths(baths)
         setIsOpen(!isOpen);
-        setNumBeds(beds);
-        setNumBaths(baths);
+        getHome()
     }
 
     const closeModal = () => {

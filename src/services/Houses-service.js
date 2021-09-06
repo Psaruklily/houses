@@ -2,8 +2,8 @@ import axios from "axios";
 
 export default class HousesService {
     
-    async getHouses(param1, param2) {
-        return await axios.get(`http://localhost:5000/houses`, {params: {beds: param1, baths: param2}})
+    async getHouses(params) {
+        return await axios.get(`http://localhost:5000/houses`, {params})
             .then(value => value.data);
     }  
 
