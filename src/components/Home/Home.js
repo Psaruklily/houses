@@ -1,10 +1,10 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Houses from '../AllHouses/Houses';
-import {ButtonFilter} from '../ButtonFilter';
+import { ButtonFilter } from '../ButtonFilter';
 import HousesService from '../../services/Houses-service';
 import './style.css';
 import Loader from '../Loader/LoaderComponent';
-import {withRouter, useHistory} from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 import Select from '../Select/Select';
 
 // const Dropdown = ({ children }) => {
@@ -34,12 +34,10 @@ import Select from '../Select/Select';
 
 
 
-const Home = ({textFromInput}) => {
-
-//   console.log('textFromInput', textFromInput);
+const Home = ({ textFromInput, isFocus }) => {
 
     const query = new URLSearchParams(window.location.search);
-    
+
     const [allHouses, setAllHouses] = useState([]);
     const [filteredHouses, setFilteredHouses] = useState(allHouses);
     const [loader, setLoader] = useState(false);
@@ -47,31 +45,42 @@ const Home = ({textFromInput}) => {
     const [beds, setBeds] = useState(query.get('beds') || null);
     const [baths, setBaths] = useState(query.get('baths') || null);
     const [isOpen, setIsOpen] = useState(false);
+    const [address, setAddress] = useState(null);
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
 
-    const queryFromHeader = new URLSearchParams(document.location.search.substring(1));
-    const res = queryFromHeader.get('address');
-    console.log(res);
-
     const service = new HousesService();
 
-    const getHome = () => {
+    useEffect(() => {
+        setAddressInQuery();
+        getHome(textFromInput);
+    }, [textFromInput]);
+
+    const setAddressInQuery = () => {
+        const query = new URLSearchParams();
+        query.set('address', textFromInput);
+        setAddress(textFromInput);
+
+        if (isFocus) {
+            history.push(`/?${query}`);
+        }
+    }
+
+    const getHome = (addr) => {
         setLoader(true);
         setTimeout(() => {
-            service.getHouses({beds, baths})
-            .then(value => {
-                console.log('!!!!!!!!!!!!!!!!!', value)
-                setAllHouses(value);
-                setFilteredHouses(value);
-                setLoader(false);
-            });
+            service.getHouses({ beds, baths, address: addr })
+                .then(value => {
+                    setAllHouses(value);
+                    setFilteredHouses(value);
+                    setLoader(false);
+                });
         }, 1000)
     }
 
     useEffect(() => {
         getHome();
-    },[]);
+    }, []);
 
     // useEffect(() => {
     //     let result = [];
@@ -114,14 +123,14 @@ const Home = ({textFromInput}) => {
     return (
         <div>
             <div className='wrapper-for-homeContent'>
-`               <div className='homesPageDesktop_filter'>
+                `               <div className='homesPageDesktop_filter'>
                     <div className='filter-buttons'>
-                        <ButtonFilter onChildClick={closeModal} text={'Beds and baths'}/>
-                        <ButtonFilter text={'Price'}/>
-                        <ButtonFilter text={'More filters'}/>
+                        <ButtonFilter onChildClick={closeModal} text={'Beds and baths'} />
+                        <ButtonFilter text={'Price'} />
+                        <ButtonFilter text={'More filters'} />
                     </div>
                 </div>
-   
+
                 <div className='page-wrapper'>
 
                     {isOpen && (<div className='filter-dropdown-menu' ref={wrapperRef}>
@@ -129,19 +138,19 @@ const Home = ({textFromInput}) => {
                             <div className='filter-dropdown-menu_filters_wrapper-child-cont'>
                                 <div className='filter-dropdown-menu_filters_label'>Beds</div>
                                 <div>
-                                    <Select setSelectedBeds={setBeds}/>
+                                    <Select setSelectedBeds={setBeds} />
                                 </div>
                             </div>
 
                             <div className='filter-dropdown-menu_filters_wrapper-child-cont'>
                                 <div className='filter-dropdown-menu_filters_label'>Baths</div>
                                 <div>
-                                    <Select setSelectedBeds={setBaths}/>
+                                    <Select setSelectedBeds={setBaths} />
                                 </div>
                             </div>
                         </div>
-                        <hr className='line'/>
-                        
+                        <hr className='line' />
+
                         <div className='filter-dropdown-menu_buttons'>
                             <div onClick={closeModal} className='filter-dropdown-menu_buttons-reset'>
                                 <span>Reset</span>
@@ -151,13 +160,13 @@ const Home = ({textFromInput}) => {
                             </div>
                         </div>
                     </div>)}
-                      
+
 
                     {filteredHouses.length === 0 && <p className='not-available'>0 home available</p>}
                     {loader && <Loader />}
-                    <Houses houses={filteredHouses}/>
+                    <Houses houses={filteredHouses} />
                 </div>`
-            </div>       
+            </div>
         </div>
     )
 }

@@ -12,16 +12,21 @@ import {
 
 function App() {
   const [textFromInput, setTextFromInput] = useState('');
-  
+  const [isFocus, setIsFocus] = useState(false);
+
+  const inputFocus = () => {
+    setIsFocus(!isFocus);
+  }
+
   return (
     <div>
       <Router>
-          <Header />
+          <Header onFocus={inputFocus} onChange={(e) => setTextFromInput(e.target.value.toLowerCase())}/>
           <hr className='line'/>
           <Switch>
             <Route exact path='/houses/:id' component={HouseDetails}/> 
             <Route exact path='/'>
-              <Home />
+              <Home textFromInput={textFromInput} isFocus={isFocus}/>
             </Route>
           </Switch>
       </Router>

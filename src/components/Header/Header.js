@@ -6,23 +6,24 @@ import HousesService from '../../services/Houses-service';
 
 const service = new HousesService();
 
-const Header = ({onChange}) => {
+const Header = ({onChange, onFocus}) => {
 
     const history = useHistory();
+    
     
     const submitAction = () => {
         console.log('Submited!');
     }
 
-    const setAddressInQuery = (event) => {
-        let inputValue = event.target.value;
-        const query = new URLSearchParams();
-        query.set('address', inputValue);
-        history.push(`/?${query}`);
-        const address = query.get('address');
-        console.log('address--------', address)
-        service.getHouses({address});
-    }
+    // const setAddressInQuery = (event) => {
+    //     let inputValue = event.target.value;
+    //     const query = new URLSearchParams();
+    //     query.set('address', inputValue);
+    //     history.push(`/?${query}`);
+    //     const address = query.get('address');
+    //     console.log('address--------', address)
+    //     service.getHouses({address});
+    // }
 
     return (
         <div className='header'>
@@ -32,7 +33,7 @@ const Header = ({onChange}) => {
 
             <form onSubmit={submitAction}>
                 <div className='header-input-container'>
-                    <input type='text' onChange={setAddressInQuery} onFocus={setAddressInQuery} className='input' placeholder='Search by address'/>
+                    <input type='text' onChange={(e) => onChange(e)} onFocus={onFocus} className='input' placeholder='Search by address'/>
                 </div>
             </form>
             
