@@ -6,6 +6,7 @@ import './style.css';
 import Loader from '../Loader/LoaderComponent';
 import { withRouter, useHistory } from "react-router-dom";
 import Select from '../Select/Select';
+import useDebounce from '../../services/Debounce';
 
 // const Dropdown = ({ children }) => {
 //     const wrapperRef = React.useRef(null);
@@ -32,14 +33,11 @@ import Select from '../Select/Select';
 
 // )
 
-
-
 const Home = ({ textFromInput, isFocus }) => {
 
     const query = new URLSearchParams(window.location.search);
 
     const [allHouses, setAllHouses] = useState([]);
-    const [filteredHouses, setFilteredHouses] = useState(allHouses);
     const [loader, setLoader] = useState(false);
     const history = useHistory();
     const [beds, setBeds] = useState(query.get('beds') || null);
@@ -50,11 +48,6 @@ const Home = ({ textFromInput, isFocus }) => {
     useOutsideAlerter(wrapperRef);
 
     const service = new HousesService();
-
-    useEffect(() => {
-        setAddressInQuery();
-        getHome(textFromInput);
-    }, [textFromInput]);
 
     const setAddressInQuery = () => {
         const query = new URLSearchParams();
@@ -68,27 +61,19 @@ const Home = ({ textFromInput, isFocus }) => {
 
     const getHome = (addr) => {
         setLoader(true);
-        setTimeout(() => {
-            service.getHouses({ beds, baths, address: addr })
-                .then(value => {
-                    setAllHouses(value);
-                    setFilteredHouses(value);
-                    setLoader(false);
-                });
-        }, 1000)
+        service.getHouses({ beds, baths, address: addr })
+            .then(value => {
+                setAllHouses(value);
+                setLoader(false);
+            });
     }
+
+    useDebounce(textFromInput, setAddressInQuery);
+    useDebounce(textFromInput, getHome);
 
     useEffect(() => {
         getHome();
     }, []);
-
-    // useEffect(() => {
-    //     let result = [];
-    //     result = allHouses.filter(house => {
-    //         return house.address.toLowerCase().search(textFromInput) !== -1;
-    //     });
-    //     setFilteredHouses(result);
-    // }, [textFromInput]);
 
     const save = () => {
         const query = new URLSearchParams();
@@ -162,9 +147,9 @@ const Home = ({ textFromInput, isFocus }) => {
                     </div>)}
 
 
-                    {filteredHouses.length === 0 && <p className='not-available'>0 home available</p>}
+                    {allHouses.length === 0 && <p className='not-available'>0 home available</p>}
                     {loader && <Loader />}
-                    <Houses houses={filteredHouses} />
+                    <Houses houses={allHouses} />
                 </div>`
             </div>
         </div>
