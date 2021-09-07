@@ -43,20 +43,20 @@ const Home = ({ textFromInput, isFocus }) => {
     const [beds, setBeds] = useState(query.get('beds') || null);
     const [baths, setBaths] = useState(query.get('baths') || null);
     const [isOpen, setIsOpen] = useState(false);
-    const [address, setAddress] = useState(null);
+    const [address, setAddress] = useState(query.get('address') || null);
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
 
     const service = new HousesService();
 
-    const setAddressInQuery = () => {
+    const setAddressInQuery = (value) => {
         const query = new URLSearchParams();
         query.set('address', textFromInput);
         setAddress(textFromInput);
-
-        if (isFocus) {
-            history.push(`/?${query}`);
+        if(value === '') {
+            query.delete('address');
         }
+        history.push(`/?${query}`);
     }
 
     const getHome = (addr) => {

@@ -3,7 +3,7 @@ import {useEffect} from 'react';
 export default function useDebounce(value, handler) {
     useEffect(() => {
         const timeout = setTimeout(() => {
-            handler(value || null);
+            handler(value);
         }, 200);
 
         return () => {
